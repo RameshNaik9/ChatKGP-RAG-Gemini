@@ -75,7 +75,11 @@ async def get_chat_engine(conversation_id: str, chat_profile: str) -> ContextCha
     if conversation_id not in chat_sessions:
         memory = ChatMemoryBuffer.from_defaults(token_limit=40000)
         fusionretriever = KGPChatroomModel().get_fusion_retriever(chat_profile=chat_profile)
-        chat_engine = ContextChatEngine.from_defaults(retriever=fusionretriever, memory=memory, system_prompt=template,node_postprocessors=[colbert_reranker])
+        chat_engine = ContextChatEngine.from_defaults(retriever=fusionretriever, 
+                                                      memory=memory, 
+                                                      system_prompt=template,
+                                                      node_postprocessors=[colbert_reranker]
+                                                      )
         chat_sessions[conversation_id] = {"engine": chat_engine,"title_generated": False}  # Initialize title status to False
         
     return chat_sessions[conversation_id]["engine"]

@@ -1,6 +1,5 @@
 from tags import get_tags
 
-
 def question_recommendations(history, LLM):
     tags, _ = get_tags(history, LLM)
 
